@@ -37,6 +37,11 @@ void dfs(int i, int j, vector<vector<int>>& grid) {
         }
         return count;
     }
+        
+        
+     NOTE: DFS IS FASTER AND SPACE EFFICIENT THAN BFS
+             
+             
     // int numEnclaves(vector<vector<int>>& grid) {
     //     //BFS
     //     int dir_x[4] = {1, -1, 0, 0};
@@ -50,6 +55,7 @@ void dfs(int i, int j, vector<vector<int>>& grid) {
     //                 continue;
     //             queue<pair<int, int>> q;
     //             q.push({i, j});
+    //             vis[i][j]=true;
     //             int cells = 0; 
     //             bool enclosed = true; 
     //             while(!q.empty()){
