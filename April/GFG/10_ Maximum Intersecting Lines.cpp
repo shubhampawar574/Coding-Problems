@@ -1,6 +1,6 @@
 int maxIntersections(vector<vector<int>> lines, int N) {
         // Code here
-        unordered_map<int,int> mm;
+        map<int,int> mm; //can't use unordered_map, since, elements should be in order only
         for(auto x:lines){
             mm[x[0]]++;
             mm[x[1]+1]--;
