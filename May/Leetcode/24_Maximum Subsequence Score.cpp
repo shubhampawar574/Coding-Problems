@@ -1,19 +1,25 @@
-vector<pair<int,int>> vec;
-        for(int i=0;i<nums1.size();i++)
-            vec.push_back({nums2[i],nums1[i]});
-        sort(vec.rbegin(),vec.rend());
-        long long ans = 0;
-        long long curr_sum = 0;
-        priority_queue<int,vector<int>,greater<int>> pq;
-        for(int i=0;i<k-1;i++){
-            curr_sum += vec[i].second;
-            pq.push(vec[i].second);
+long long maxScore(vector<int>& nums1, vector<int>& nums2, int k) {
+       int n = nums1.size();
+        vector<vector<int>> pairs(n, vector<int>(2));
+        for (int i = 0; i < n; i++) {
+            pairs[i][0] = nums2[i];
+            pairs[i][1] = nums1[i];
         }
-        for(int i=k-1;i<nums1.size();i++){
-            curr_sum+=vec[i].second;
-            pq.push(vec[i].second);
-            ans = max(ans,curr_sum * vec[i].first);
-            curr_sum-=pq.top();
-            pq.pop();
+        sort(pairs.begin(), pairs.end(), [](const vector<int>& a, const vector<int>& b) {
+            return b[0] < a[0];
+        });
+        priority_queue<int, vector<int>, greater<int>> pq;
+        long res = 0, totalSum = 0;
+        for (const vector<int>& pair : pairs) {
+            pq.push(pair[1]);
+            totalSum += pair[1];
+            if (pq.size() > k) {
+                totalSum -= pq.top();
+                pq.pop();
+            }
+            if (pq.size() == k) {
+                res = max(res, totalSum * pair[0]);
+            }
         }
-        return ans;
+        return res; 
+    }
